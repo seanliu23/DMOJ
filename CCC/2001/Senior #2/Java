@@ -1,0 +1,49 @@
+import java.io.*;
+import java.util.*;
+
+public class Spirals{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    int start = in.nextInt();
+    int end = in.nextInt();
+    
+    int[][] line = new int [15][15];
+    line[7][7] = start;
+    
+    int[] rowChge = {1, 0, -1, 0};
+    int[] colChge = {0, 1, 0, -1};
+    int currentD = 0;
+    
+    int currentR = 7;
+    int currentC = 7;
+    int minR = 7, maxR = 7;
+    int minC = 7, maxC = 7;
+    for (int i = start + 1; i <= end; i++){
+      int nextR = currentR + rowChge[currentD];
+      int nextC = currentC + colChge[currentD];
+      
+      line[nextR][nextC] = i;
+      
+      int nextD = (currentD + 1) % 4;
+      if (line[nextR + rowChge[nextD]][nextC + colChge[nextD]] == 0){
+        currentD = nextD;
+      }
+      currentR = nextR;
+      currentC = nextC;
+      
+      minR = Math.min(minR, currentR);
+      maxR = Math.max(maxR, currentR);
+      minC = Math.min(minC, currentC);
+      maxC = Math.max(maxC, currentC);
+    }
+    for (int i = minR; i <= maxR; i++){
+      for (int j = minC; j <= maxC; j++){
+        if (line[i][j] > 0) System.out.printf("%2d", line[i][j]);
+        else System.out.print("  ");
+        if (j == maxC) System.out.println();
+        else System.out.print(" ");
+      }
+    }
+  }
+}
