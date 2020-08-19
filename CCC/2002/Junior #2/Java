@@ -1,0 +1,26 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+  public static void main(String[] args) {
+    Scanner in = new Scanner(System.in);
+    
+    String s = in.nextLine();
+    
+    while (!(s.equals("quit!"))){
+      if ((s.charAt(s.length()-1) == 'r') && (s.charAt(s.length()-2) == 'o')){
+        if ((s.charAt(s.length()-3) != 'a' &&
+            s.charAt(s.length()-3) != 'e' &&
+            s.charAt(s.length()-3) != 'i' &&
+            s.charAt(s.length()-3) != 'o' &&
+            s.charAt(s.length()-3) != 'u' &&
+            s.charAt(s.length()-3) != 'y') && (s.length() > 4)){
+          String subS = s.substring(0, s.length()-2);
+          System.out.println(subS + "our");
+        }else System.out.println(s);
+      }else System.out.println(s);
+      s = in.next();
+    }
+    
+  }
+}
