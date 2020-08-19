@@ -1,0 +1,73 @@
+import java.io.*;
+import java.util.*;
+
+public class CCC00S3Surfing { // also J5 of the same year
+  public static void main(String[] args) {
+    Scanner in = new Scanner(System.in);
+    
+    int x = Integer.parseInt(in.nextLine());
+    HashMap<String, WebPage> map = new HashMap<String, WebPage>();
+    
+    for (int i = 0; i < x; i++){
+      String url = in.next();
+      WebPage w = new WebPage(url);
+      
+      String s;
+      
+      while (!(s = in.nextLine()).equals("</HTML>")){
+        int idx = 0;//where the <A> tag is
+        int idxStart = 0;//where the search starts
+        while ((idx = s.indexOf("<A HREF=\"", idxStart)) >= 0) {
+          int idxEnd = s.indexOf("\"", idx + 9);
+          String link = s.substring(idx + 9, idxEnd);
+          w.linkURLs.add(link);
+          
+          System.out.printf("Link from %s to %s\n", url, link);
+          idxStart = idxEnd;
+        }
+      }
+      map.put(url, w);// add to the hashmap
+    }
+    String s1;
+    String s2;
+    
+    while (!(s1 = in.nextLine()).equals("The End")){
+      s2 = in.nextLine();
+      if (bfs(map, s1, s2))System.out.printf("Can surf from %s to %s.\n", s1, s2);
+      else System.out.printf("Can\'t surf from %s to %s.\n", s1, s2);
+      
+    }
+  }
+  public static boolean bfs(HashMap<String, WebPage> map, String s1, String s2){
+    for (WebPage w: map.values()) w.visited = false;
+    WebPage w = map.get(s1);
+    
+    Queue<WebPage> q = new ArrayDeque<WebPage>();
+    q.add(w);
+    w.visited = true;
+    
+    while (!q.isEmpty()){
+      WebPage v = q.poll();
+      for (String s: v.linkURLs){
+        if (s.equals(s2)) return true;
+        WebPage u = map.get(s);
+        if (!u.visited){
+          q.add(u);
+          u.visited = true;
+        }
+      }
+    }
+    return false;
+  }
+  
+  
+  static class WebPage{
+    String url;
+    ArrayList<String> linkURLs = new ArrayList<String>();
+    boolean visited;
+    
+    public WebPage(String a){
+      url = a;
+    }
+  }
+}
