@@ -1,0 +1,33 @@
+import java.io.*;
+import java.util.*;
+
+public class Poetry{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    String[] vowels = {"a", "e", "i", "o", "u"};
+    
+    int x = Integer.parseInt(in.nextLine());
+    
+    for (int i = 1; i <= x; i++){
+      String[] lastSyll = new String[4];
+      
+      for (int j = 0; j < 4; j++){
+        String[] s = in.nextLine().split(" ");
+        String lastWord = s[s.length-1].toLowerCase();
+        
+        int lastVIndex = -1;
+        for (String v : vowels){
+          lastVIndex = Math.max(lastVIndex, lastWord.lastIndexOf(v));
+        }
+        if (lastVIndex == -1) lastSyll[j] = lastWord;
+        else lastSyll[j] = lastWord.substring(lastVIndex);
+      }
+      if (lastSyll[0].equals(lastSyll[1]) && lastSyll[0].equals(lastSyll[2]) && lastSyll[0].equals(lastSyll[3])) System.out.println("perfect");
+      else if (lastSyll[0].equals(lastSyll[1]) && lastSyll[2].equals(lastSyll[3])) System.out.println("even");
+      else if (lastSyll[0].equals(lastSyll[2]) && lastSyll[1].equals(lastSyll[3])) System.out.println("cross");
+      else if (lastSyll[0].equals(lastSyll[3]) && lastSyll[1].equals(lastSyll[2])) System.out.println("shell");
+      else System.out.println("free");
+    }
+  }
+}
