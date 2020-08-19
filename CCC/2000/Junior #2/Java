@@ -1,0 +1,41 @@
+import java.io.*;
+import java.util.*;
+
+public class Rotate9966{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    int x = in.nextInt();
+    int y = in.nextInt();
+    
+    int cnt = 0;
+    
+    // search through all the numbers between x and y
+    for (int i = x; i <= y; i++){
+      if (valid(i+"")) cnt++;
+
+    }
+    System.out.println( cnt );
+  }
+  static boolean valid(String s){
+      int front = 0;
+      int back = s.length()-1;
+      
+      if (s.contains("2") || s.contains("3") || s.contains("4") || s.contains("5") || s.contains("7")) return false;
+      if (s.length() == 0) return true;
+      if (front == back) {
+        return s.equals("0") || s.equals("1") || s.equals("8");
+      } else {
+        if (s.charAt(front) == '6') {
+          if (s.charAt(back) == '9') return valid(s.substring(1, s.length()-1));
+        else return false;
+        }
+        else if (s.charAt(front) == '9'){
+          if (s.charAt(back) == '6') return valid(s.substring(1, s.length()-1));
+          else return false;
+        }
+        if (s.charAt(front) == s.charAt(back)) return valid(s.substring(1, s.length()-1));
+        else return false;
+      }
+  }
+}
