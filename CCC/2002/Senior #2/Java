@@ -1,0 +1,28 @@
+import java.io.*;
+import java.util.*;
+
+public class FractionAction{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    int num = in.nextInt();
+    int den = in.nextInt();
+    
+    int g = (num < den)?gcd(den,num):gcd(num, den);
+    
+    num /= g;
+    den /= g;
+    int whole = num/den;
+    int frac = num%den;
+    
+    if (whole > 0) System.out.print(whole);
+    if (whole > 0 && frac > 0) System.out.print(" ");
+    if (frac > 0) System.out.print(frac + "/" + den);
+    
+    System.out.println();
+  }
+  public static int gcd(int num, int den){
+    if (den == 0) return num;
+    return gcd(den, num % den);
+  }
+}
