@@ -1,0 +1,36 @@
+import java.io.*;
+import java.util.*;
+
+public class SCouncilBreakfast{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    int[] prices = new int[4];
+    prices[0] = in.nextInt();
+    prices[1] = in.nextInt();
+    prices[2] = in.nextInt();
+    prices[3] = in.nextInt();
+    
+    int n = in.nextInt();
+    int nCombi = 0;
+    int min = n;
+    
+    for (int i = 0; i <= n/prices[0]; i++){
+      int nLeft1 = n - i*prices[0];
+      for (int j = 0; j <= nLeft1/prices[1]; j++){
+        int nLeft2 = nLeft1 - j*prices[1];
+        for (int k = 0; k <= nLeft2/prices[2]; k++){
+          int nLeft3 = nLeft2 - k*prices[2];
+          if (nLeft3%prices[3] == 0){
+            System.out.printf("# of PINK is %d # of GREEN is %d # of RED is %d # of ORANGE is %d\n", i, j, k, nLeft3/prices[3]);
+            
+            nCombi++;
+            min = Math.min(min, i + j + k + nLeft3/prices[3]);
+          }
+        }
+      }
+    }
+    System.out.println("Total combinations is " + nCombi + ".");
+    System.out.printf("Minimum number of tickets to print is %d.\n", min);
+  }
+}
