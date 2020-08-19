@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.*;
+
+public class PicturePerfect{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    int pic = in.nextInt();
+    int per = (int)Math.round(Math.sqrt(pic));
+    
+    for (int i = per; i > 0; i--){
+      if (pic%i == 0){
+        int div = pic/i;
+        System.out.println("Minimum perimeter is " + (2*(div + i)) + " with dimensions " + div + " x " + i);
+        break;
+      }
+    }
+    while (pic != 0){
+      
+      pic = in.nextInt();
+      int per2 = (int)Math.round(Math.sqrt(pic));
+      
+      for (int i = per2; i > 0; i--){
+        if (pic%i == 0){
+          int div = pic/i;
+          System.out.println("Minimum perimeter is " + (2*(div + i)) + " with dimensions " + div + " x " + i);
+          break;
+        }
+      }
+    }
+  }
+}
