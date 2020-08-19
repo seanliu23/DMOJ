@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*;
+
+public class BabblingBrooks{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    int x = in.nextInt();
+    
+    ArrayList<Double> streams = new ArrayList<Double>();
+    
+    for (int i = 0; i < x; i++){
+      streams.add(in.nextDouble());
+    }
+    
+    int cmd;
+    
+    while ((cmd = in.nextInt()) != 77){
+      if (cmd == 99){
+        int streamSplit = in.nextInt()-1;
+        int leftPer = in.nextInt();
+        
+        double leftStream = streams.get(streamSplit)*leftPer*0.01;
+        double rightStream = streams.get(streamSplit) - leftStream;
+        
+        streams.remove(streamSplit);
+        streams.add(streamSplit, rightStream);
+        streams.add(streamSplit, leftStream);
+      }
+      else {
+        int streamMerge = in.nextInt()-1;
+        double mergeValue = streams.get(streamMerge) + streams.get(streamMerge+1);
+        streams.set(streamMerge+1, mergeValue);
+        streams.remove(streamMerge);
+      }
+    }
+    for (int i = 0; i < streams.size(); i++){
+      System.out.print(Math.round(streams.get(i)));
+      if (i == streams.size()-1) System.out.println();
+      else System.out.print(" ");
+    }
+  }
+}
