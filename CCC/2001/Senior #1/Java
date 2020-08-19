@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*;
+
+public class KeepScore{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    String s = in.nextLine();
+    String[] card = new String[4];
+    String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
+    
+    card[0] = s.substring(1, s.indexOf("D"));
+    card[1] = s.substring(s.indexOf("D")+ 1, s.indexOf("H"));
+    card[2] = s.substring(s.indexOf("H")+ 1, s.indexOf("S"));
+    card[3] = s.substring(s.indexOf("S")+ 1);
+    System.out.println("Cards Dealt              Points");
+    
+    int totalPoints = 0;
+    
+    for (int i = 0; i < 4; i++){
+      System.out.print(suits[i] + " ");
+      int points = 0;
+      
+      for (char x: card[i].toCharArray()){
+        System.out.print(x + " ");
+        points += getPoints(x);
+      }
+      if (card[i].length() == 0) points += 3;
+      if (card[i].length() == 1) points += 2;
+      if (card[i].length() == 2) points += 1;
+      totalPoints += points;
+      System.out.println(points);
+  }
+    System.out.println("                         Total " + totalPoints);
+}
+  public static int getPoints(char x) {
+    if (x == 'A') return 4;
+    if (x == 'K') return 3;
+    if (x == 'Q') return 2;
+    if (x == 'J') return 1;
+    else return 0;
+  }
+}
