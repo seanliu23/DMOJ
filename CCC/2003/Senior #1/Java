@@ -1,0 +1,46 @@
+import java.io.*;
+import java.util.*;
+
+public class SnakesNLadders{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    int n;
+    int square = 1;
+    while ((n = in.nextInt()) != 0){
+      square += n;
+      if (square == 54){
+        square = 19;
+      }
+      else if (square == 90){
+        square = 48;
+      }
+      else if (square == 99){
+        square = 77;
+      }
+      else if (square == 9){
+        square = 34;
+      }
+      else if (square == 40){
+        square = 64;
+      }
+      else if (square == 67){
+        square = 86;
+      }
+      else if (square > 100){
+        square -= n;
+      }
+      System.out.println("You are now on square " + square);
+      
+      
+      if (square == 100){
+        System.out.println("You Win!");
+        return;
+      }
+    }
+    if (n == 0){
+      System.out.println("You Quit!");
+      return;
+    }
+  }
+}
