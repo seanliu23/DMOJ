@@ -1,0 +1,45 @@
+import java.io.*;
+import java.util.*;
+
+public class Trident{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    int t = in.nextInt();
+    int s = in.nextInt();
+    int h = in.nextInt();
+    int col = t;
+    int row = 2*s + 3;
+    int[][] head = new int[col][row];
+    
+    for (int v = 1; v <= col; v++){
+      for (int w = 1; w <= row; w++){
+        if (w == 1|| w == (((int)Math.round(row/2))+1)){
+          System.out.print("*");
+        }
+        else if (w == row){
+          System.out.println("*");
+        }
+        else System.out.print(" ");
+      }
+    }
+    for (int x = 1; x <= row; x++){
+      if (x != row){
+        System.out.print("*");
+      }
+      if (x == row){
+        System.out.println("*");
+      }
+    }
+    
+    for (int y = 1; y <= h; y++){
+      for (int z = 1; z < (s + 2); z++){
+        if (z == (s + 1)){
+          System.out.println(" *");
+        }else{
+          System.out.print(" ");
+        }
+      }
+    }
+  }
+}
