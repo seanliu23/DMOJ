@@ -1,0 +1,34 @@
+import java.io.*;
+import java.util.*;
+
+public class CCC01J1{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    int n = in.nextInt();
+    int x = -2;
+    int y = n+1;
+    
+    
+    for (int i = ((n+1)/2); i > 1; i--){
+      y -= 2;
+      for (int j = 1; j <= 2*n; j++){
+        if (j <= (n-y) || j > (n+y)){
+          if (j == 2*n) System.out.println("*");
+          else System.out.print("*");
+        }
+        else System.out.print(" ");
+      }
+    }
+    for (int i = (n+1)/2; i <= n; i++){
+      x += 2;
+      for (int j = 1; j <= 2*n; j++){
+        if (j <= (n-x) || j > (n+x)){
+          if (j == 2*n) System.out.println("*");
+          else System.out.print("*");
+        }
+        else System.out.print(" ");
+      }
+    }
+  }
+}
