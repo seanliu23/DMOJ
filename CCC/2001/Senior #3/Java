@@ -1,0 +1,61 @@
+import java.io.*;
+import java.util.*;
+
+public class CCC01S3StratBombing{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    String s;
+    ArrayList<String> es = new ArrayList<String>();
+    V[] vs = new V[26];
+    while (!(s = in.nextLine()).equals("**")){
+      es.add(s);
+      int u = s.charAt(0)- 'A';
+      int v = s.charAt(1)- 'A';
+      
+      if (vs[u] == null) vs[u] = new V(u);
+      if (vs[v] == null) vs[v] = new V(v);
+      
+      vs[u].nbs.put(vs[v], es.size()-1);
+      vs[v].nbs.put(vs[u], es.size()-1);
+    }
+    int cnt = 0;
+    for (int i = 0; i < es.size(); i++){
+      if (!reachable(vs, i)) {
+        System.out.println(es.get(i));
+        cnt++;
+      }
+    }
+    System.out.println("There are " + cnt +" disconnecting roads.");
+  }
+  public static boolean reachable(V[] vs, int x){
+    for (int i = 0; i < vs.length; i++){
+    if (vs[i] != null) vs[i].visited = false;
+    }
+    Queue<V> q = new ArrayDeque<V>();
+    q.add(vs[0]);
+    vs[0].visited = true;
+    
+    while (!q.isEmpty()){
+      V u = q.poll(); // extract first element in queue
+      
+      for (Map.Entry<V, Integer> entry : u.nbs.entrySet()){
+        if (!entry.getKey().visited && entry.getValue() != x){
+          if (entry.getKey().id == 1) return true;
+          
+          q.add(entry.getKey());
+          entry.getKey().visited = true;
+        }
+      }
+    }
+    return false;
+  }
+  static class V{
+    int id; //id for 0 for a, 1 for b, 2 for c, 3 for d....
+    HashMap<V, Integer> nbs = new HashMap<V, Integer>();
+    boolean visited;
+    public V(int a){
+      id = a;
+    }
+  }
+}
