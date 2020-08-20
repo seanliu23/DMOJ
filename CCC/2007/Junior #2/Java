@@ -1,0 +1,28 @@
+import java.util.*;
+import java.io.*;
+
+public class CCC07J2TXTMSG{
+  public static void main(String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    while (true){
+      String x = in.nextLine();
+      if (x.equals("TTYL")){
+        System.out.println("talk to you later");
+        return;
+      }
+      else if (x.equals("CU")) System.out.println("see you");
+      else if (x.equals(":-)")) System.out.println("I'm happy");
+      else if (x.equals(":-("))System.out.println("I'm unhappy");
+      else if (x.equals(";-)"))System.out.println("wink");
+      else if (x.equals(":-P"))System.out.println("stick out my tongue");
+      else if (x.equals("(~.~)"))System.out.println("sleepy");
+      else if (x.equals("TA"))System.out.println("totally awesome");
+      else if (x.equals("CCC"))System.out.println("Canadian Computing Competition");
+      else if (x.equals("CUZ"))System.out.println("because");
+      else if (x.equals("TY"))System.out.println("thank you");
+      else if (x.equals("YW")) System.out.println("you're welcome");
+      else System.out.println(x);
+    }
+  }
+}
