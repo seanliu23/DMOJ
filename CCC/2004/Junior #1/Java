@@ -1,0 +1,12 @@
+import java.io.*;
+import java.util.*;
+
+public class Squares{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    int x = in.nextInt();
+    int y = (int)Math.sqrt(x);
+    System.out.println("The largest square has side length "+ y + ".");
+  }
+}
