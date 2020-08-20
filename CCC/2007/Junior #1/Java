@@ -1,0 +1,15 @@
+import java.util.*;
+import java.io.*;
+
+public class CCC07J1Middle{
+  public static void main(String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    int[] A = new int[3];
+    A[0] = in.nextInt();
+    A[1] = in.nextInt();
+    A[2] = in.nextInt();
+    Arrays.sort(A);
+    System.out.println(A[1]);
+  }
+}
