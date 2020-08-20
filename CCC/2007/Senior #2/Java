@@ -1,0 +1,58 @@
+import java.io.*;
+import java.util.*;
+
+public class CCC07S2Boxes{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    //read boxes into arrayShape
+    int n = in.nextInt();
+    Shape[] boxes = new Shape[n];
+    for (int i = 0; i < n; i++){
+      boxes[i] = new Shape(in.nextInt(), in.nextInt(), in.nextInt());
+    }
+    
+    Arrays.sort(boxes);
+    
+    //read items into arrayShape
+    int m = in.nextInt();
+    Shape[] items = new Shape[m];
+    for (int i = 0; i < m; i++){
+      items[i] = new Shape(in.nextInt(), in.nextInt(), in.nextInt());
+      boolean fit = false;
+      for (int j = 0; j < n; j++){
+        if (boxes[j].fit(items[i])){
+          System.out.println(boxes[j].v);
+          fit = true;
+          break;
+        }
+      }
+      if (!fit) System.out.println("Item does not fit.");
+    }
+  }
+  
+  static class Shape implements Comparable<Shape>{
+    int x, y, z;
+    int v;
+    
+    public Shape(int a, int b, int c){
+      int[] A = new int[3];
+      A[0] = a;
+      A[1] = b;
+      A[2] = c;
+      Arrays.sort(A);
+      x = A[0];
+      y = A[1];
+      z = A[2];
+      v = x*y*z;
+    }
+    
+    public boolean fit(Shape s){
+      return x >= s.x && y >= s.y && z >= s.z;
+    }
+    
+    public int compareTo(Shape s){
+      return new Integer(v).compareTo(s.v);
+    }
+  }
+}
