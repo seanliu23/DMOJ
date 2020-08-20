@@ -1,0 +1,48 @@
+import java.io.*;
+import java.util.*;
+
+public class CCC06J4ToughTeens{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    ArrayList<ArrayList<Integer>> list = new ArrayList<ArrayList<Integer>>();
+    list.add(null);//fill element 0
+    
+    for (int i = 1; i <= 7; i++){
+      list.add(new ArrayList<Integer>());
+    }
+    list.get(1).add(7);
+    list.get(1).add(4);
+    list.get(2).add(1);
+    list.get(3).add(4);
+    list.get(3).add(5);
+    int x, y;
+      while (((x = in.nextInt()) != 0) && ((y = in.nextInt()) != 0)){
+      list.get(x).add(y);
+    }
+      int[] incom = new int[8];//0 still counts
+      for (int i = 1; i <= 7; i++){
+        for (int j : list.get(i)){
+          incom[j]++;
+        }
+      }
+      TreeSet<Integer> set = new TreeSet<Integer>();
+      
+      for (int i = 1; i <= 7; i++){
+        if (incom[i] == 0) set.add(i);
+      }
+      String s = "";
+      int cnt = 0;
+      while (!set.isEmpty()){
+        int u = set.pollFirst();
+        s += (u + " ");
+        cnt++;
+        for (int j : list.get(u)){
+          incom[j]--;
+          if (incom[j] == 0) set.add(j);
+        }
+      }
+      if (cnt < 7) System.out.println("Cannot complete these tasks. Going to bed.");
+      else System.out.println(s.trim());
+  }
+}
