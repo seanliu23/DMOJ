@@ -1,0 +1,96 @@
+import java.io.*;
+import java.util.*;
+
+public class CCC03S3FloorPlan{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    int n = in.nextInt();
+    int row = in.nextInt();
+    int col = in.nextInt();
+    
+    int[] dr = {1,0,-1,0};
+    int[] dc = {0,1,0,-1};
+    
+    char[][] plan = new char[row][col];
+    V[][] vs = new V[row][col];
+    
+    for (int i = 0; i < row; i++){
+      String s = in.next();
+      for (int j = 0; j < col; j++){
+        plan[i][j] = s.charAt(j);
+        
+        if (plan[i][j] == '.'){
+          vs[i][j] = new V(i, j);
+        }
+      }
+    }
+    
+    
+    for (int i = 0; i < row; i++){
+      for (int j = 0; j < col; j++){
+        if (vs[i][j] != null){
+          for (int k = 0; k < 4; k++){
+            int ni = i + dr[k];
+            int nj = j + dc[k];
+            if (0 <= ni && ni < row && 0 <= nj && nj < col && vs[ni][nj] != null){
+              vs[i][j].nbs.add(vs[ni][nj]);
+              vs[ni][nj].nbs.add(vs[i][j]);
+            }
+          }
+        }
+      }
+    }
+    ArrayList<Integer> sizes = new ArrayList<Integer>();
+    for (int i = 0; i < row; i++){
+      for (int j = 0; j < col; j++){
+        if (vs[i][j] != null && !vs[i][j].visited){
+          sizes.add(bfs(vs[i][j]));
+        }
+      }
+    }
+    Collections.sort(sizes);
+    int roomCnt = 0;
+    for (int i = sizes.size()-1; i >= 0; i--){
+      if (sizes.get(i) <= n){
+        n -= sizes.get(i);
+        roomCnt++;
+      }else{
+        break;
+      }
+    }
+    if (roomCnt == 1) System.out.printf("%d room, %d square metre(s) left over\n",roomCnt, n);
+    else System.out.printf("%d rooms, %d square metre(s) left over\n",roomCnt, n);
+  }
+  
+  
+  public static int bfs(V v){
+    Queue<V> q = new ArrayDeque<V>();
+    q.add(v);
+    v.visited = true;
+    int size = 1;
+    
+    while (!q.isEmpty()){
+      V u = q.poll();
+      for (V w: u.nbs){
+        if (!w.visited){
+          q.add(w);
+          w.visited = true;
+          size++;
+        }
+      }
+    }
+    return size;
+  }
+  
+  static class V{
+    int i, j;
+    ArrayList<V> nbs = new ArrayList<V>();
+    boolean visited = false;
+    
+    public V(int a, int b){
+      i = a;
+      j = b;
+    }
+  }
+}
