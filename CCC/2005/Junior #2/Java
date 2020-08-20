@@ -1,0 +1,25 @@
+import java.io.*;
+import java.util.*;
+
+public class CCC05J2RSANumbers{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    int x = in.nextInt();
+    int y = in.nextInt();
+    
+    int cnt = 0;
+    for (int i = x; i <= y; i++){
+      if (isRSA(i)) cnt++;
+    }
+    System.out.printf("The number of RSA numbers between %d and %d is %d\n", x, y, cnt);
+  }
+  
+  public static boolean isRSA(int k){
+    int divcnt = 0;
+    for (int i = 2; i < k; i++){
+      if (k%i == 0) divcnt++;
+    }
+    return divcnt == 2;
+  }
+}
