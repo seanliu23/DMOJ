@@ -1,0 +1,70 @@
+import java.io.*;
+import java.util.*;
+
+public class CCC04S3SpreadSheet{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    int x = 10;
+    int y = 9;
+    V[][] vs = new V[x][y];
+    
+    for (int i = 0; i < x; i++){
+      for (int j = 0; j < y; j++){
+        vs[i][j] = new V(i, j);
+        
+      }
+    }
+    
+    Queue<V> q = new ArrayDeque<V>();
+    
+    //read input and create graph
+    for (int i = 0; i < x; i++){
+      for (int j = 0; j < y; j++){
+        String s = in.next();
+        if (Character.isLetter(s.charAt(0))){
+          String[] ss = s.split("\\+");
+          int d = ss.length;
+            for (int k = 0; k < d; k++){
+            int row = ss[k].charAt(0) - 'A';
+            int col = ss[k].charAt(1) - '1';
+            vs[row][col].nbs.add(vs[i][j]);
+          }
+          vs[i][j].IncomEdge = d;
+        }else{
+          vs[i][j].value = Integer.parseInt(s);
+          q.add(vs[i][j]);
+        }
+      }
+    }
+    while (!q.isEmpty()){
+      V u = q.poll(); // first element
+      for (V w: u.nbs){
+        w.value += u.value;
+        w.IncomEdge --; // remove edge after being added from its neighbor
+        
+        if (w.IncomEdge == 0) q.add(w); //if edge = 0, w has become independant and will be added to queue
+      }
+    }
+    for (int i = 0; i < x; i++){
+      for (int j = 0; j < y; j++){
+        if (vs[i][j].IncomEdge > 0) System.out.print("*");
+        else System.out.print(vs[i][j].value);
+        if (j == y-1) System.out.println();
+        else System.out.print(" ");
+      }
+    }
+  }
+  static class V{
+    int i;
+    int j;
+    int value;
+    ArrayList<V> nbs = new ArrayList<V>();
+    int IncomEdge = 0;
+    
+    public V( int a, int b){
+      i = a;
+      j = b;
+    }
+  }
+}
