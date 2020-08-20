@@ -1,0 +1,26 @@
+import java.io.*;
+import java.util.*;
+
+public class CCC05S2MouseMove{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    int c = in.nextInt();
+    int r = in.nextInt();
+    int x = 0;
+    int y = 0;
+    while (true){
+      int n = in.nextInt();
+      int m = in.nextInt();
+      if (n == 0 && m == 0) break;
+      x += n;
+      y += m;
+      if (x > c) x = c;
+      if (x < 0) x = 0;
+      if (y > r) y = r;
+      if (y < 0) y = 0;
+      System.out.println( x + " " + y);
+    }
+    
+  }
+}
