@@ -1,0 +1,16 @@
+import java.io.*;
+import java.util.*;
+
+public class CCC07J4AnagramCheckerREDO{
+  public static void main(String[] args){
+    Scanner in = new Scanner(System.in);
+    if (countChars(in.nextLine()).equals(countChars(in.nextLine()))) System.out.println("Is an anagram.");
+    else System.out.println("Is not an anagram.");
+    
+  }
+  static String countChars(String s){
+    char[] charArray = s.toCharArray();
+    Arrays.sort(charArray);
+    return new String(charArray).trim();
+  }
+}
