@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+
+public class CCC09S2LightsOnOff{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    int R = in.nextInt();
+    int L = in.nextInt();
+    
+    String[] row = new String[R];
+    
+    for (int i = 0; i < R; i++){
+      row[i] = "";
+      for (int j = 0; j < L; j++){
+        row[i] += in.nextInt();
+      }
+    }
+    HashSet<String> set = new HashSet<String>();
+    set.add(row[R-1]);
+    
+    for (int i = 1; i < R; i++){//skip the first row because no button
+      String[] rowClone = Arrays.copyOf(row, R);
+      for (int j = i; j < R; j++){
+        press(rowClone, j, L);
+      }
+      set.add(rowClone[R-1]);
+    }
+    System.out.println(set.size());
+  }
+  static void press(String[] row, int b, int L){
+    String s = "";
+    for (int i = 0; i < L; i++){
+      if (row[b].charAt(i) == row[b-1].charAt(i)) s += 0;
+      else s += 1;
+    }
+    row[b] = s;
+  }
+}
