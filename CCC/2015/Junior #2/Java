@@ -1,0 +1,30 @@
+import java.io.*;
+import java.util.*;
+
+public class HappySad {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        
+        String s = in.nextLine();
+        int happyCnt = 0;
+        int sadCnt = 0;
+        for (int i = 0; i < s.length() - 2; i++) {
+            if ((s.charAt(i) == ':') && (s.charAt(i+1) == '-')) {
+                if (s.charAt(i+2) == ')') {
+                    happyCnt++;
+                } else if (s.charAt(i+2) == '(') {
+                    sadCnt++;
+                }
+            }
+        }
+        if (happyCnt == 0 && sadCnt == 0) {
+            System.out.println("none");
+        } else if (happyCnt > sadCnt) {
+            System.out.println("happy");
+        } else if (sadCnt > happyCnt) {
+            System.out.println("sad");
+        } else {
+            System.out.println("unsure");
+        }
+    }
+}
