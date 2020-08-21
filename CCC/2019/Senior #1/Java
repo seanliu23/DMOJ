@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+
+public class Flipper {
+  public static void main(String [] args) throws Exception {
+    Scanner in = new Scanner(System.in);
+        
+        String Flips = in.nextLine();
+        int[][] Grid = new int[2][2];
+        Grid[0][0] = 1;
+        Grid[0][1] = 2;
+        Grid[1][0] = 3;
+        Grid[1][1] = 4;
+        
+        int temp = 0;
+        for (int i = 0; i < Flips.length(); i++){
+            if (Flips.charAt(i) == ('H')){
+                temp = Grid[0][0];
+                Grid[0][0] = Grid[1][0];
+                Grid[1][0] = temp;
+                
+                temp = Grid[0][1];
+                Grid[0][1] = Grid[1][1];
+                Grid[1][1] = temp;
+            }else{
+                temp = Grid[0][0];
+                Grid[0][0] = Grid[0][1];
+                Grid[0][1] = temp;
+                
+                temp = Grid[1][0];
+                Grid[1][0] = Grid[1][1];
+                Grid[1][1] = temp;
+            }
+        }
+
+        System.out.println(Grid[0][0] + " " + Grid[0][1]);
+        System.out.println(Grid[1][0] + " " + Grid[1][1]);
+    }
+}
