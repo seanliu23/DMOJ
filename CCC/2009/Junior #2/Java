@@ -1,0 +1,27 @@
+import java.io.*;
+import java.util.*;
+
+public class CCC09J2OldFishingHole{
+  public static void main(String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    int PTrou = in.nextInt();
+    int PPike = in.nextInt();
+    int PPick = in.nextInt();
+    int total = in.nextInt();
+    
+    int cnt = 0;
+    
+    for (int i = 0 ; i <= total/PTrou; i++){
+      for (int j = 0 ; j <= total/PPike; j++){
+        for (int k = 0; k <= total/PPick; k++){
+          if ((i*PTrou + j*PPike + k*PPick <= total) && ((i != 0) || (j != 0) || (k != 0)) ){
+            cnt++;
+            System.out.println(i + " Brown Trout, " + j +  " Northern Pike, " + k + " Yellow Pickerel");
+          }
+        }
+      }
+    }
+    System.out.println("Number of ways to catch fish: " + cnt);
+  }
+}
