@@ -1,0 +1,41 @@
+import java.util.*;
+import java.io.*;
+
+public class CCC15J3Rovarspraket{
+  public static void main(String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    String s = in.nextLine();
+    String r = "";
+    for (int i = 0; i < s.length(); i++){
+      r += translate(s.charAt(i));
+    }
+    System.out.println(r);
+  }
+  static String translate(char c){
+    String sub = c + "";
+    if (isVowel(c)) return sub;
+    else {
+      for (int i = 0; i < 9; i++){//max gap possible between a consonant & vowel
+        if (isVowel((char)((c - 'a') - i + 'a'))){
+          sub += (char)((c - 'a') - i + 'a');
+          break;
+        }
+        if (isVowel((char)((c - 'a') + i + 'a'))){
+          sub += (char)((c - 'a') + i + 'a');
+          break;
+        }
+      }
+      if (c == 'z') sub = sub + "z";
+      else {
+        if (isVowel((char)((c - 'a') + 1 + 'a'))) sub = sub + ((char)((c - 'a') + 2 + 'a'));
+        else sub = sub + ((char)((c - 'a') + 1 + 'a'));
+      }
+      return sub;
+    }
+  }
+  static boolean isVowel(char c){
+    if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') return true;
+    else return false;
+  }
+}
