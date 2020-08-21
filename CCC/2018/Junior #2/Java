@@ -1,0 +1,22 @@
+import java.io.*;
+import java.util.*;
+
+public class OccupyParking {
+  public static void main( String[] args) throws Exception {
+    
+    Scanner input = new Scanner(System.in);
+    
+    int n = input.nextInt();
+    input.nextLine();
+    
+    String s1 = input.nextLine();
+    String s2 = input.nextLine();
+    
+    int cnt = 0;
+    
+    for( int i = 0; i < n; i++ ) {
+      if (s1.charAt(i) == 'C' && s2.charAt(i) == 'C') cnt++;
+    }
+    System.out.println(cnt);
+  }
+}
