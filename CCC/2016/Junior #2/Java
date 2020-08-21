@@ -1,0 +1,25 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+  public static void main(String[] args) {
+    Scanner in = new Scanner(System.in);
+    
+    int[][] square = new int[4][4];
+    for (int i = 0; i < 4; i++){
+      for (int j = 0; j < 4; j++){
+        square[i][j] = in.nextInt();
+      }
+    }
+    int sum = square[0][0] + square[0][1] + square[0][2] + square[0][3];
+    if (sum == square[1][0] + square[1][1] + square[1][2] + square[1][3] &&
+        sum == square[2][0] + square[2][1] + square[2][2] + square[2][3] &&
+        sum == square[3][0] + square[3][1] + square[3][2] + square[3][3] &&
+        sum == square[0][0] + square[1][0] + square[2][0] + square[3][0] &&
+        sum == square[0][1] + square[1][1] + square[2][1] + square[3][1] &&
+        sum == square[0][2] + square[1][2] + square[2][2] + square[3][2] &&
+        sum == square[0][3] + square[1][3] + square[2][3] + square[3][3]){
+      System.out.println("magic");
+    }else System.out.println("not magic");
+  }
+}
