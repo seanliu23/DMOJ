@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args)throws IOException{
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        
+        StringTokenizer tk = new StringTokenizer(in.readLine());
+        int T = Integer.parseInt(tk.nextToken());
+        
+        for (int i = 0; i < T; i++){
+            tk = new StringTokenizer(in.readLine());
+            int N = Integer.parseInt(tk.nextToken());
+            
+            if (isPrime(N)) System.out.println(N + " " + N);
+            else{
+                for (int j = 1; j < N; j++){
+                    if ((isPrime(N-j)) && (isPrime(N+j))){
+                        System.out.println(N-j + " " + (N+j));
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    public static boolean isPrime(int N){
+        for (int i = 2; i <= Math.sqrt(N); i++){
+            if (N%i == 0) return false;
+        }
+        return true;
+    }
+}
