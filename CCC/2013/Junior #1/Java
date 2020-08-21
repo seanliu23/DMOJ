@@ -1,0 +1,15 @@
+import java.util.*;
+import java.io.*;
+
+public class NextinLine {
+  public static void main( String[] args ) throws Exception {
+    Scanner input = new Scanner(System.in);
+    
+    int x = input.nextInt();
+    int y = input.nextInt();
+    int d = y - x;
+    
+    int z = y + d;
+    System.out.println(z);
+  }
+}
