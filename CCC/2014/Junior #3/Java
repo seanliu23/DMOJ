@@ -1,0 +1,23 @@
+import java.util.*;
+import java.io.*;
+
+public class DoubleDice {
+  public static void main( String[] args ) {
+    Scanner in = new Scanner(System.in);
+    
+    int x = in.nextInt();
+    int Player1 = 100;
+    int Player2 = 100;
+    for (int i = 0; i < x; i++) {
+        int Roll1 = in.nextInt();
+        int Roll2 = in.nextInt();
+        if (Roll1 > Roll2) {
+            Player2 -= Roll1;
+        } else if (Roll2 > Roll1) {
+            Player1 -= Roll2;
+        }
+    }
+    System.out.println(Player1);
+    System.out.println(Player2);
+  }
+}
