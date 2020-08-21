@@ -1,0 +1,26 @@
+import java.io.*;
+import java.util.*;
+
+public class CCC13S2BridgeTransportREDO{
+  public static void main( String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    int W = in.nextInt();
+    int N = in.nextInt();
+    ArrayList<Integer> cars = new ArrayList<Integer>();
+    
+    for (int i = 0; i < N; i++){
+      int car = in.nextInt();
+      cars.add(car);
+    }
+    int cnt = 0;
+    int weight = 0;
+    for (int i = 0; i < N; i++){
+      weight += cars.get(i);
+      if (i > 3) weight -= cars.get(i-4);
+      if (weight <= W) cnt++;
+      else break;
+    }
+    System.out.println(cnt);
+  }
+}
