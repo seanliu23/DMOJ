@@ -1,0 +1,92 @@
+import java.util.*;
+import java.io.*;
+
+public class CCC19S3ArithmeticSquare{
+  static int[][] A;
+  static int X = Integer.MAX_VALUE;
+  public static void main(String[] args){
+    Scanner in = new Scanner(System.in);
+    A = new int[3][3];
+    
+    // read the input
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        String s = in.next();
+        if (s.equals("X")) {
+          A[i][j] = X;
+        } else {
+          A[i][j] = Integer.parseInt(s);
+        }
+      }
+    }
+    
+    if (fill() > 0 && A[1][1] == X) A[1][1] = 0;
+    if (fill() > 0 && A[0][1] == X) A[0][1] = 0;
+    if (fill() > 0 && A[2][1] == X) A[2][1] = 0;
+    if (fill() > 0 && A[1][0] == X) A[1][0] = 0;
+    if (fill() > 0 && A[1][2] == X) A[1][2] = 0;
+    if (fill() > 0 && A[0][0] == X) A[0][0] = 0;
+    if (fill() > 0 && A[0][2] == X) A[0][2] = 0;
+    if (fill() > 0 && A[2][0] == X) A[2][0] = 0;
+    if (fill() > 0 && A[2][2] == X) A[2][2] = 0;
+    
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        System.out.print(A[i][j]);
+        if (j < 2) System.out.print(" ");
+        else System.out.println();
+      }
+    }
+        
+  }
+  
+  // fill in all determined values in A
+  // and return the number of slots remain unfilled
+  static int fill() {
+    boolean changed;
+    do {
+      changed = false;
+      for (int i = 0; i < 3; i++) {
+        // only the first slots is empty in each row
+        if (A[i][0] == X && A[i][1] < X && A[i][2] < X) {
+          A[i][0] = 2*A[i][1] - A[i][2]; 
+          changed = true;
+        }
+        // only the second slots is empty in each row
+        if (A[i][0] < X && A[i][1] == X && A[i][2] < X) {
+          A[i][1] = (A[i][0] + A[i][2])/2; 
+          changed = true;
+        }
+        // only the third slots is empty in each row
+        if (A[i][0] < X && A[i][1] < X && A[i][2] == X) {
+          A[i][2] = 2*A[i][1] - A[i][0]; 
+          changed = true;
+        }
+        // only the first slots is empty in each column
+        if (A[0][i] == X && A[1][i] < X && A[2][i] < X) {
+          A[0][i] = 2*A[1][i] - A[2][i]; 
+          changed = true;
+        }
+        // only the second slots is empty in each colum
+        if (A[0][i] < X && A[1][i] == X && A[2][i] < X) {
+          A[1][i] = (A[0][i] + A[2][i])/2; 
+          changed = true;
+        }
+        // only the third slots is empty in each colum
+        if (A[0][i] < X && A[1][i] < X && A[2][i] == X) {
+          A[2][i] = 2*A[1][i] - A[0][i]; 
+          changed = true;
+        }
+      }      
+    } while (changed);
+    
+    int cnt = 0;
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        if (A[i][j] == X) cnt++;
+      }
+    }
+    
+    return cnt;
+  }
+}
