@@ -1,0 +1,47 @@
+import java.io.*;
+import java.util.*;
+
+public class DMOPCDrHenriSeeingStars{
+  public static void main(String[] args){
+    Scanner in = new Scanner(System.in);
+    
+    int R = in.nextInt();
+    int X = in.nextInt();
+    int Y = in.nextInt();
+    
+    int xA = in.nextInt();
+    int yA = in.nextInt();
+    int mA = in.nextInt();
+    
+    int xB = in.nextInt();
+    int yB = in.nextInt();
+    int mB = in.nextInt();
+    
+    int xC = in.nextInt();
+    int yC = in.nextInt();
+    int mC = in.nextInt();
+    
+    if (mA < mC && mA < mB){
+      if ( Math.sqrt(Math.pow(X - xA, 2) + Math.pow(Y - yA, 2)) < R ){
+        System.out.println("What a beauty!");
+      }else{
+        System.out.println("Time to move my telescope!");
+      }
+    }
+    else if (mB < mC && mB < mA){
+      if ( Math.sqrt(Math.pow(X - xB, 2) + Math.pow(Y - yB, 2)) < R ){
+        System.out.println("What a beauty!");
+      }else{
+        System.out.println("Time to move my telescope!");
+      }
+    }
+    else if (mC < mB && mC < mA){
+      if ( Math.sqrt(Math.pow(X - xC, 2) + Math.pow(Y - yC, 2)) < R ){
+        System.out.println("What a beauty!");
+      }else{
+        System.out.println("Time to move my telescope!");
+      }
+    }
+    
+  }
+}
